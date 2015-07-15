@@ -1,0 +1,57 @@
+<label class="selector_label" ng-click="showList('toggle')">{{label}} <span style='text-decoration:underline'>{{selectedItem[key]}}</span> <i class="arrow"></i>
+	<ul class="selector_list">
+		<li class="selector_list_item" ng-repeat="item in list" ng-click="select(item)">{{item[key]}}</li>
+	</ul>
+</label>
+<style type="text/css">
+	.selector{
+		padding: 0;
+		margin: 0;
+	}
+	.selector.top .selector_list{
+		top: auto;
+		bottom: 100%;
+	}
+	.selector.top .arrow:before{
+		content:"▲";
+	}
+	.selector_label{
+		cursor: pointer;
+		position: relative;
+	}
+	.selector_list{
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		position: absolute;
+		top: 100%;
+		right: 0;
+		z-index: 1;
+		background: #fff;
+		transition-duration:0.3s;
+		box-sizing:border-box;
+		overflow: hidden;
+		border: 1px solid #CBCBCB;
+
+		display: none;
+	}
+	.arrow:before{
+		content:"▼";
+		display: inline-block;
+	}
+	.selector_list.active{
+		display: block;
+	}
+	.selector_list_item{
+		cursor: pointer;
+		padding: 4px 7px;
+		border-bottom: 1px solid #CBCBCB;
+		transition-duration:0.3s;
+		text-align: center;
+		white-space: nowrap;
+  		overflow: hidden;
+		&:hover{
+			background: #CBCBCB;
+		}
+	}
+</style>

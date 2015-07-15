@@ -1,0 +1,60 @@
+/*
+Name: Double Cricles
+Description:Simple double circle loader BY LEAVY.
+Content:<div class='loader loader-double'></div>
+Colors:First color$first;Second color$second
+Settings:Outer Speed$speed1;Inner Speed(--s)$speed2
+*/
+#loading{
+	position: absolute;
+	top: 0; left: 0;
+	right: 0; bottom: 0;
+	text-align: center;
+	padding-top: 300px;
+	z-index: 999;
+}
+.loader{
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+	position: relative;
+	padding: 0;
+	margin: 0;
+}
+.loader-double{
+	border-radius: 50px;
+	border: 6px solid transparent;
+	border-top-color: #1e8ad2;
+	border-bottom-color: #1e8ad2;
+	-webkit-animation:spin 1s infinite;
+	animation:spin 1s infinite;
+}
+.loader-double:after{
+	content: "";
+	position: absolute;
+	border-radius: 50px;
+	top: 5px; left: 5px; right: 5px; bottom: 5px;
+	border: 4px solid transparent;
+	border-top-color: #1e8ad2;
+	border-bottom-color: #1e8ad2;
+	-webkit-animation:spinreverse 2s infinite;
+	animation:spinreverse 2s infinite;
+}
+
+@-webkit-keyframes spin{
+	0%{-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+	100%{-webkit-transform:rotate(360deg);transform:rotate(360deg);}
+}
+
+@keyframes spin{
+	0%{-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+	100%{-webkit-transform:rotate(360deg);transform:rotate(360deg);}
+}
+@-webkit-keyframes spinreverse{
+	0%{-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+	100%{-webkit-transform:rotate(-360deg);transform:rotate(-360deg);}
+}
+@keyframes spinreverse{
+	0%{-webkit-transform:rotate(0deg);transform:rotate(0deg);}
+	100%{-webkit-transform:rotate(-360deg);transform:rotate(-360deg);}
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w1.org/1998/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Asana New Tab</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="angular.js"></script>
+
+	<script type="text/javascript" src="options.js"></script>
+	<script type="text/javascript" src="asana.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/loader.css">
+</head>
+<body ng-app="asanaExt" ng-controller="asanaExtCtrl">
+
+	<div class="loginPanel" ng-show="show.login">
+		<div class="loginForm">
+			<p>
+				You must log in to Asana before you can use the application.
+			</p>
+			<a ng-href="{{config.loginURL}}" class="btn" target="_blank">Login</a>
+			<span class="or">OR</span>
+			<a ng-href="{{config.signupURL}}" class="btn secondary" target="_blank">Sign Up</a>
+
+			<div class="loginFormLogo">
+				<img src="img/logo_login.png">
+				<p>
+					Welcome to <strong>Asana new-tab extension</strong>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="appPanel" ng-show="show.app">
+
+		<div id="loading">
+			<div class='loader loader-double'></div>
+		</div>
+		
+		<header class="appHeader">
+			<img class="logoHeader" src="img/logo_white.png">
+			<p>
+				The asana new-tab extension is not an official asana product and was not created by the asana team
+			</p>
+
+			<div class="currentUser" id="currentUser">
+				<div class="avatar" ng-style="{'background-image':'url('+currentUser.picture+')'}"></div>
+				<h3 id="currentUserName">{{currentUser.name}} &#x25bc;</h3>
+			</div>
+
+			<div class="controls" id="controls">
+				<ul class="controls_list">
+					<li>
+						<a ng-href="{{config.loginURL}}" target="_blank">
+							<img src="img/dashboard.png">
+							My Dashboard
+						</a>
+					</li>
+					<li>
+						<a ng-href="{{config.logoutURL}}" target="_blank">
+							<img src="img/logout.png">
+							Logout
+						</a>
+					</li>
+					<li>
+						<a href="mailto:orlench@gmail.com?Subject=Asana%20new%20tab%20extension" target="_blank">
+							<img src="img/contact.png">
+							Contact us
+						</a>
+					</li>
+				</ul>
+			</div>
+		</header>
+
+		<div class="currentUserTasks" id="currentUserTasks">
+			<h3>Your tasks <small><a href="#createTask" id="createTaskLink">Create a new task</a></small></h3>
+			<hr>
+			<div class="half">
+				<div class="groupe" options="{color:'#EC9228',name:'Today',status:'today'}" tasks="currentUserTasks" complete="completeTask(task)" edit="editTask(task)" delete="deleteTask(task)"></div>
+				<div class="groupe" options="{color:'#ECC028',name:'Upcoming',status:'upcoming'}" tasks="currentUserTasks" complete="completeTask(task)" edit="editTask(task)" delete="deleteTask(task)"></div>
+			</div>
+			<div class="half_sep"></div>
+			<div class="half">
+				<div class="groupe" options="{color:'#52D020',name:'Later',status:'later'}" tasks="currentUserTasks" complete="completeTask(task)" edit="editTask(task)" delete="deleteTask(task)"></div>
+				<div class="groupe" options="{color:'#1E8AD2',name:'New Tasks',status:'inbox'}" tasks="currentUserTasks" complete="completeTask(task)" edit="editTask(task)" delete="deleteTask(task)"></div>
+			</div>
+			
+			<div class="cb"></div>
+			<hr id="createANewTask">
+			<div class="newTask" id="createTask">
+				<h3>
+					Create a new task
+				</h3>
+				<div class="fields">
+					<div class="half">
+						<input ng-model="newTask.name" type="text" class="field_text inputs" placeholder="Task name">
+						<textarea ng-model="newTask.notes" type="text" class="field_textarea inputs" placeholder="Task description"></textarea>
+					</div>
+					<div class="half_sep"></div>
+					<div class="half">
+						<h4>Task scheduling</h4>
+						<div class="selector users" list="workspaces" key="name" label="Your current workspace is " selected="selectedWorkspace(item)"></div>		
+						<div class="selector users" list="users" key="name" label="This task will be assignee to " selected="selectedUser(item)" default="{id:currentUser.id}"></div>
+						<div class="selector users top" list="[{priority:'Today'},{priority:'Upcoming'},{priority:'Later'}]" key="priority" label="Task priority : " selected="selectedPriority(item)"></div>		
+					</div>
+					<div class="cb"></div>
+					<hr>
+					<button ng-click="addTask()" class="btn addBtn"><i class="icon">+</i>Add Task</button>
+					<div class="cb"></div>
+				</div>
+			</div>
+
+			<div class="help">
+				<h3>Help</h3>
+				<ul>
+					<li>
+						Double-click a task to start editing
+					</li>
+					<li>
+						Click the X button next to a task, to delete the task. The task will be removed from your asana dashboard too
+					</li>
+				</ul>
+			</div>
+
+		</div>
+
+
+		<div class="notification">
+			{{notification}}
+		</div>
+	</div>
+</body>
+</html>

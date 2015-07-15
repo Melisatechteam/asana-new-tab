@@ -1,0 +1,13 @@
+<label ng-style="{background:options.color}" class="title">{{options.name}}</label>
+<ul>
+	<li class="task" ng-repeat="task in tasks | groupe:options" ng-class="{editing:task.editing,section:task.color}" ng-dblclick="task.editing=true">
+		<label class="checkbox" for="{{task.id}}">
+			<input type="checkbox" ng-model="task.completed" ng-change="complete({task:task})" id="{{task.id}}">
+			<span class="checkbox_main" ng-style="{color:options.color,'border-color':options.color}"></span>
+		</label>
+		<label class="name" ng-style="{color:task.color}"> {{task.name}} </label>
+		<label class="notes">{{task.notes}}</label>	
+		<input class="edit" type="text" ng-model="task.name" ng-blur="edit({task:task})" ng-style="{'border-color':options.color}">
+		<span class="delete" ng-click="delete({task:task})" ng-style="{color:options.color}">&#x2716;</span>
+	</li>
+</ul>
